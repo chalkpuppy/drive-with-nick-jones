@@ -219,3 +219,187 @@ Received Import Request.
 Start importing Assets/Prefabs/New Folder using Guid(c7a38c50d992b43118bc90929f71b312) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7d1a1b978d0e02dfb56aa642b3650eb1') in 0.000689 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 49.628331 seconds.
+  path: Assets/Models/cone.fbx
+  artifactKey: Guid(0323404e3543042faafd7d981fac6a3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/cone.fbx using Guid(0323404e3543042faafd7d981fac6a3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e50fdae1d3af41e542027b9711ab1713') in 2.886968 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 11
+========================================================================
+Received Import Request.
+  Time since last request: 7.912216 seconds.
+  path: Assets/Materials/Car.mat
+  artifactKey: Guid(b41623f4f549d9c488064059998f2345) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Car.mat using Guid(b41623f4f549d9c488064059998f2345) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6a848051eff2d02013ea0ed9c3dc09c2') in 2.817908 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 10.991666 seconds.
+  path: Assets/Textures/Fingerprints01_3K.png
+  artifactKey: Guid(ba9094351c774d44eacae335cd1afdf0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fingerprints01_3K.png using Guid(ba9094351c774d44eacae335cd1afdf0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4301d3cac1f56da353f23caf8eab810a') in 0.234074 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 80.750808 seconds.
+  path: Assets/Models/cone.fbx
+  artifactKey: Guid(0323404e3543042faafd7d981fac6a3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/cone.fbx using Guid(0323404e3543042faafd7d981fac6a3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '75a476e2a9f7a1e2806be4f841b73f47') in 0.252527 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 10
+========================================================================
+Received Import Request.
+  Time since last request: 11.979182 seconds.
+  path: Assets/Materials/Car.mat
+  artifactKey: Guid(b41623f4f549d9c488064059998f2345) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Car.mat using Guid(b41623f4f549d9c488064059998f2345) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6155531a77eafd8c258cf5bb0ebb5f45') in 0.288895 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 5.545968 seconds.
+  path: Assets/Materials/ConeMain.mat
+  artifactKey: Guid(4476bf835de464d1f874879233fff79f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/ConeMain.mat using Guid(4476bf835de464d1f874879233fff79f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '44936494df68b9d3fca1aba6ae4d8061') in 0.288109 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 115.622502 seconds.
+  path: Assets/Materials/ConeMain.mat
+  artifactKey: Guid(4476bf835de464d1f874879233fff79f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/ConeMain.mat using Guid(4476bf835de464d1f874879233fff79f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd3204551075ae89ff9a27ae5f92dd8ec') in 0.614933 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 6.855590 seconds.
+  path: Assets/Materials/ConeSecondary.mat
+  artifactKey: Guid(f385e1cd225104ae8a140f7658f57240) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/ConeSecondary.mat using Guid(f385e1cd225104ae8a140f7658f57240) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e6380fdcc883fe4627fdfe92f8dc14b9') in 0.404142 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 278.762727 seconds.
+  path: Assets/Materials/ConeMain.mat
+  artifactKey: Guid(4476bf835de464d1f874879233fff79f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/ConeMain.mat using Guid(4476bf835de464d1f874879233fff79f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7f47db85d418c35fac7c193643dd5b8c') in 0.552281 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 21.635855 seconds.
+  path: Assets/Scenes/SampleScene.unity
+  artifactKey: Guid(c850ee8c3b14cc8459e7e186857cf567) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/SampleScene.unity using Guid(c850ee8c3b14cc8459e7e186857cf567) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '44ba7833cee22a55a30d7c5ce5c18f62') in 0.001018 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 3.687757 seconds.
+  path: Assets/Scenes/ConeMain.mat
+  artifactKey: Guid(e003ea7fe5e1d4b369842676cf7a661e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/ConeMain.mat using Guid(e003ea7fe5e1d4b369842676cf7a661e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd923fcfb56de7f25bde931e78adbe788') in 0.243634 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 177.111934 seconds.
+  path: Assets/Shaders/ClayShader.shadergraph
+  artifactKey: Guid(8d99046d4a36be64096d0baee7a92f86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Shaders/ClayShader.shadergraph using Guid(8d99046d4a36be64096d0baee7a92f86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0bf6ca12b8ff5ed3c385f91d0b7f4746') in 0.200861 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 32.599975 seconds.
+  path: Assets/Shaders/ClayShader.shadergraph
+  artifactKey: Guid(8d99046d4a36be64096d0baee7a92f86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Shaders/ClayShader.shadergraph using Guid(8d99046d4a36be64096d0baee7a92f86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a9a4fdd19952a84163fc6f238ffa4323') in 1.994136 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 14.506898 seconds.
+  path: Assets/Shaders/ClayShader.shadergraph
+  artifactKey: Guid(8d99046d4a36be64096d0baee7a92f86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Shaders/ClayShader.shadergraph using Guid(8d99046d4a36be64096d0baee7a92f86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f43d4f14e1f34320f7b22b7ab32311f7') in 0.268516 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 97.830408 seconds.
+  path: Assets/Shaders/ClayShader.shadergraph
+  artifactKey: Guid(8d99046d4a36be64096d0baee7a92f86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Shaders/ClayShader.shadergraph using Guid(8d99046d4a36be64096d0baee7a92f86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '898a25a881016a544942dffa4be758f0') in 2.630764 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 34.200176 seconds.
+  path: Assets/Shaders/ClayShader.shadergraph
+  artifactKey: Guid(8d99046d4a36be64096d0baee7a92f86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Shaders/ClayShader.shadergraph using Guid(8d99046d4a36be64096d0baee7a92f86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '968fcdcafa8d7260a2f04bc3a5ebe91a') in 2.274011 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 80.410862 seconds.
+  path: Assets/Shaders/ClayShader.shadergraph
+  artifactKey: Guid(8d99046d4a36be64096d0baee7a92f86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Shaders/ClayShader.shadergraph using Guid(8d99046d4a36be64096d0baee7a92f86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f40369467c58af59561176986124d2fc') in 2.600454 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 13.139445 seconds.
+  path: Assets/Materials/Car.mat
+  artifactKey: Guid(b41623f4f549d9c488064059998f2345) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Car.mat using Guid(b41623f4f549d9c488064059998f2345) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8cad90720116ee11d22cf5277cb7bd8e') in 0.335224 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 57.736652 seconds.
+  path: Assets/Materials/Car.mat
+  artifactKey: Guid(b41623f4f549d9c488064059998f2345) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Car.mat using Guid(b41623f4f549d9c488064059998f2345) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2c170c8116d592a6eceb6a8b1d09e2e7') in 2.025233 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 29.866163 seconds.
+  path: Assets/Materials/Car.mat
+  artifactKey: Guid(b41623f4f549d9c488064059998f2345) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Car.mat using Guid(b41623f4f549d9c488064059998f2345) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '90ddbe41f795e87a11683da436dca8e3') in 1.668157 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 68.731894 seconds.
+  path: Assets/Materials/Car.mat
+  artifactKey: Guid(b41623f4f549d9c488064059998f2345) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Car.mat using Guid(b41623f4f549d9c488064059998f2345) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a2f6f759bc3765ec7a3301e2b67ba0f0') in 2.179224 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 43.831561 seconds.
+  path: Assets/Materials/Car.mat
+  artifactKey: Guid(b41623f4f549d9c488064059998f2345) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Car.mat using Guid(b41623f4f549d9c488064059998f2345) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e38cb2b81a5b7fdb9d6869bb5dfbbe7c') in 2.930226 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 190.905869 seconds.
+  path: Assets/Materials/ConeMain.mat
+  artifactKey: Guid(4476bf835de464d1f874879233fff79f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/ConeMain.mat using Guid(4476bf835de464d1f874879233fff79f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2f60be278ef501333b36dcc4df9cf2e5') in 1.430467 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
