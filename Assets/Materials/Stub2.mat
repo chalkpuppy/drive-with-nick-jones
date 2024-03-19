@@ -116,10 +116,10 @@ Material:
     - _Speed: 3
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _StrengthMax: -0.54
-    - _StrengthMin: -0.02
+    - _StrengthMax: -1.47
+    - _StrengthMin: -2.56
     - _Surface: 0
-    - _Tiling: 0
+    - _Tiling: -0.13
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
