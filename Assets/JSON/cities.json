@@ -1,0 +1,43 @@
+{
+  "Europe": [
+    {"city": "London", "country": "England", "is_collected": false},
+    {"city": "Edinburgh", "country": "Scotland", "is_collected": false},
+    {"city": "Paris", "country": "France", "is_collected": false},
+    {"city": "Berlin", "country": "Germany", "is_collected": false},
+    {"city": "Rome", "country": "Italy", "is_collected": false},
+    {"city": "Kyiv", "country": "Ukraine", "is_collected": false},
+    {"city": "Warsaw", "country": "Poland", "is_collected": false}
+  ],
+  "Asia": [
+    {"city": "Tokyo", "country": "Japan", "is_collected": false},
+    {"city": "Beijing", "country": "China", "is_collected": false},
+    {"city": "Seoul", "country": "South Korea", "is_collected": false},
+    {"city": "Bangkok", "country": "Thailand", "is_collected": false},
+    {"city": "New Delhi", "country": "India", "is_collected": false}
+  ],
+  "Africa": [
+    {"city": "Cairo", "country": "Egypt", "is_collected": false},
+    {"city": "Johannesburg", "country": "South Africa", "is_collected": false},
+    {"city": "Nairobi", "country": "Kenya", "is_collected": false}
+  ],
+  "Australia": [
+    {"city": "Sydney", "country": "Australia", "is_collected": false},
+    {"city": "Melbourne", "country": "Australia", "is_collected": false},
+    {"city": "Auckland", "country": "New Zealand", "is_collected": false}
+  ],
+  "North America": [
+    {"city": "New York City", "country": "USA", "is_collected": false},
+    {"city": "Los Angeles", "country": "USA", "is_collected": false},
+    {"city": "Toronto", "country": "Canada", "is_collected": false},
+    {"city": "Mexico City", "country": "Mexico", "is_collected": false}
+  ],
+  "South America": [
+    {"city": "Rio de Janeiro", "country": "Brazil", "is_collected": false},
+    {"city": "Buenos Aires", "country": "Argentina", "is_collected": false},
+    {"city": "Santiago", "country": "Chile", "is_collected": false},
+    {"city": "Lima", "country": "Peru", "is_collected": false}
+  ],
+  "Antarctica": [
+    {"city": "Vernadsky Research Base", "country": "", "is_collected": false}
+  ]
+}
