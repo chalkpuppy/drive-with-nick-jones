@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cc11edc4fd451d14985b583dc54867dc
+guid: fb197d0d28c5447779f9cd3601a8bb37
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Playpen Sans
+  - Grandstander
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

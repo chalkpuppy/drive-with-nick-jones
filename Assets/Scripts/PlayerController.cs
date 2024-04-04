@@ -62,12 +62,6 @@ public class PlayerController : MonoBehaviour
             // Determine swipe direction
             Vector3 swipeDirection = (fingerDownPosition.x - fingerUpPosition.x > 0) ? Vector3.left : Vector3.right;
 
-            // Calculate target lane position
-            int currentLaneIndex = GetCurrentLaneIndex();
-            int nextLaneIndex = Mathf.Clamp(currentLaneIndex + (int)swipeDirection.x, 0, lanePositionsX.Length - 1);
-            targetLanePosition = new Vector3(lanePositionsX[nextLaneIndex], transform.position.y, transform.position.z);
-
-            // Trigger animation based on swipe direction
             if (swipeDirection == Vector3.right)
             {
                 animator.SetTrigger("turnRight");
@@ -76,6 +70,13 @@ public class PlayerController : MonoBehaviour
             {
                 animator.SetTrigger("turnLeft");
             }
+
+            // Calculate target lane position
+            int currentLaneIndex = GetCurrentLaneIndex();
+            int nextLaneIndex = Mathf.Clamp(currentLaneIndex + (int)swipeDirection.x, 0, lanePositionsX.Length - 1);
+            targetLanePosition = new Vector3(lanePositionsX[nextLaneIndex], transform.position.y, transform.position.z);
+
+            
         }
     }
 
