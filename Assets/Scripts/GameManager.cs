@@ -1,85 +1,96 @@
 using UnityEngine;
-using System.IO;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
-    // Define a class to represent city data
-    [System.Serializable]
-    public class CityData
+    public static GameManager instance; // Singleton instance
+
+    public Transform player; // Reference to the player object
+    public GameObject[] jungleObstacles; // Array of jungle obstacles prefabs
+    public GameObject[] desertObstacles; // Array of desert obstacles prefabs
+    public float startDelay = 2f; // Delay before starting to spawn obstacles
+    public float spawnInterval = 3f; // Initial interval between obstacle spawns
+    public float minSpawnInterval = 1f; // Minimum interval between obstacle spawns
+    public float intervalDecreaseRate = 0.1f; // Rate at which spawn interval decreases
+    public float zoneSwitchInterval = 30f; // Interval to switch between zones (in seconds)
+    public float zoneSwitchTimer = 0f; // Timer for zone switching
+
+    private List<GameObject> activeObstacles = new List<GameObject>(); // List to keep track of active obstacles
+    private Vector3[] spawnPoints = new Vector3[] { new Vector3(-2.6f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(2.6f, 0f, 0f) }; // Spawn points for obstacles
+    private bool isJungleZone = true; // Flag to indicate if the jungle zone is active
+    private float obstacleSpawnZ = 0f; // Z position to spawn the next obstacle
+
+    void Awake()
     {
-        public string city;
-        public string country;
-        public bool is_collected;
-        public string image_url;
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(gameObject);
     }
-
-    // Define a class to represent continent data
-    [System.Serializable]
-    public class ContinentData
-    {
-        public string continent;
-        public List<CityData> cities;
-    }
-
-    // Define a class to represent all continent data
-    [System.Serializable]
-    public class WorldData
-    {
-        public List<ContinentData> continents;
-    }
-
-    // JSON data structure
-    private WorldData worldData;
-
-    // List to store uncollected cities
-    private List<CityData> uncollectedCities = new List<CityData>();
 
     void Start()
     {
-        // Load the JSON file
-        string jsonText = File.ReadAllText(Application.dataPath + "/JSON/cities.json");
+        StartCoroutine(SpawnObstacles());
+    }
 
-        // Parse JSON data into the data structure
-        worldData = JsonUtility.FromJson<WorldData>(jsonText);
-
-        // Populate the list of uncollected cities
-        foreach (ContinentData continent in worldData.continents)
+    void Update()
+    {
+        // Update zone switching timer
+        zoneSwitchTimer += Time.deltaTime;
+        if (zoneSwitchTimer >= zoneSwitchInterval)
         {
-            foreach (CityData city in continent.cities)
-            {
-                if (!city.is_collected)
-                {
-                    uncollectedCities.Add(city);
-                }
-            }
+            SwitchZone();
+            zoneSwitchTimer = 0f;
         }
 
-        // Select a random uncollected city and display its name
-        CityData selectedCity = SelectRandomUncollectedCity();
-        if (selectedCity != null)
+        // Decrease spawn interval over time
+        spawnInterval = Mathf.Max(minSpawnInterval, spawnInterval - intervalDecreaseRate * Time.deltaTime);
+    }
+
+    IEnumerator SpawnObstacles()
+    {
+        yield return new WaitForSeconds(startDelay);
+
+        while (true)
         {
-            Debug.Log("Selected city: " + selectedCity.city);
+            // Choose a random spawn point
+            Vector3 spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+
+            // Choose a random obstacle from the current zone
+            GameObject obstaclePrefab = GetRandomObstacle();
+
+            // Spawn the obstacle
+            Vector3 spawnPosition = new Vector3(spawnPoint.x, spawnPoint.y, obstacleSpawnZ);
+            GameObject obstacle = Instantiate(obstaclePrefab, spawnPosition, Quaternion.identity);
+            activeObstacles.Add(obstacle);
+
+            // Update obstacle spawn position
+            obstacleSpawnZ += spawnInterval;
+
+            yield return null;
         }
     }
 
-    // Function to select a random uncollected city
-    public CityData SelectRandomUncollectedCity()
+    GameObject GetRandomObstacle()
     {
-        if (uncollectedCities.Count == 0)
-        {
-            Debug.LogError("No uncollected cities left!");
-            return null;
-        }
+        // Check which zone is active and return a random obstacle from that zone
+        if (isJungleZone)
+            return jungleObstacles[Random.Range(0, jungleObstacles.Length)];
+        else
+            return desertObstacles[Random.Range(0, desertObstacles.Length)];
+    }
 
-        // Select a random city from the list of uncollected cities
-        int randomIndex = Random.Range(0, uncollectedCities.Count);
-        CityData selectedCity = uncollectedCities[randomIndex];
+    void SwitchZone()
+    {
+        // Toggle between jungle and desert zones
+        isJungleZone = !isJungleZone;
+    }
 
-        // Remove the selected city from the list to prevent selecting it again
-        uncollectedCities.RemoveAt(randomIndex);
-
-        return selectedCity;
+    public void RemoveObstacle(GameObject obstacle)
+    {
+        // Remove obstacle from active obstacles list
+        activeObstacles.Remove(obstacle);
+        Destroy(obstacle);
     }
 }

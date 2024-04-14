@@ -14,10 +14,11 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
 
     // Movement speed
+    [SerializeField] private float forwardSpeed = 5f;
     [SerializeField] private float moveSpeed = 5f;
 
-    // Target lane position
-    private Vector3 targetLanePosition;
+    // Target lane index
+    private int currentLaneIndex = 1; // Start in the middle lane
 
     private void Start()
     {
@@ -27,11 +28,15 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        // Move forward
+        transform.Translate(0, 0, forwardSpeed * Time.deltaTime);
+
         // Detect swipe gestures
         DetectSwipe();
 
         // Move towards target lane position
-        transform.position = Vector3.MoveTowards(transform.position, targetLanePosition, moveSpeed * Time.deltaTime);
+        Vector3 targetPosition = new Vector3(lanePositionsX[currentLaneIndex], transform.position.y, transform.position.z);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
     }
 
     private void DetectSwipe()
@@ -65,21 +70,15 @@ public class PlayerController : MonoBehaviour
             if (swipeDirection == Vector3.right)
             {
                 animator.SetTrigger("turnRight");
+                currentLaneIndex = Mathf.Clamp(currentLaneIndex + 1, 0, lanePositionsX.Length - 1);
             }
             else
             {
                 animator.SetTrigger("turnLeft");
+                currentLaneIndex = Mathf.Clamp(currentLaneIndex - 1, 0, lanePositionsX.Length - 1);
             }
-
-            // Calculate target lane position
-            int currentLaneIndex = GetCurrentLaneIndex();
-            int nextLaneIndex = Mathf.Clamp(currentLaneIndex + (int)swipeDirection.x, 0, lanePositionsX.Length - 1);
-            targetLanePosition = new Vector3(lanePositionsX[nextLaneIndex], transform.position.y, transform.position.z);
-
-            
         }
     }
-
 
     private bool IsHorizontalSwipe()
     {
@@ -91,23 +90,12 @@ public class PlayerController : MonoBehaviour
         return Mathf.Abs(fingerDownPosition.x - fingerUpPosition.x) > minDistanceForSwipe;
     }
 
-    private int GetCurrentLaneIndex()
+    private void OnTriggerEnter(Collider other)
     {
-        // Find closest lane index
-        float currentX = transform.position.x;
-        float minDistance = Mathf.Infinity;
-        int closestIndex = 0;
-
-        for (int i = 0; i < lanePositionsX.Length; i++)
+        if (other.CompareTag("Obstacle"))
         {
-            float distance = Mathf.Abs(currentX - lanePositionsX[i]);
-            if (distance < minDistance)
-            {
-                minDistance = distance;
-                closestIndex = i;
-            }
+            // Play the "Break" animation
+            animator.SetTrigger("break");
         }
-
-        return closestIndex;
     }
 }
