@@ -6576,3 +6576,31 @@ AssetImportParameters requested are different than current active one (requested
   custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 6921.970757 seconds.
+  path: Assets/Materials/Car/CarBody.mat
+  artifactKey: Guid(50907526982066a4ea7e997349a72db2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Car/CarBody.mat using Guid(50907526982066a4ea7e997349a72db2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '67c7422922a3a4e5cc4f79ed184ae9e8') in 0.347566 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 22
+========================================================================
+Received Import Request.
+  Time since last request: 0.000074 seconds.
+  path: Assets/Materials/Car/CarWheel1.mat
+  artifactKey: Guid(9d9c447d6ce7ba340a48d1aae560385a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Car/CarWheel1.mat using Guid(9d9c447d6ce7ba340a48d1aae560385a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9cfcbf9497535ad9db3364eb1004a841') in 0.013219 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000083 seconds.
+  path: Assets/Materials/Car/CarWindows.mat
+  artifactKey: Guid(1dd2fc74ecf93694aa3f0dc8958b8c33) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Car/CarWindows.mat using Guid(1dd2fc74ecf93694aa3f0dc8958b8c33) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '03eb0ee5a35e063ecf530e02e2b561a3') in 0.008075 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+TcpMessagingSession - receive error: operation aborted. errorcode: 89, details: Operation aborted.
+AssetImportWorker is now disconnected from the server
+Process exiting
