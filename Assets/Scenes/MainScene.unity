@@ -438,6 +438,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: caranim2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8d9e29424f04341de9ee3f66de526f88,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 2223639932434330405, guid: 8d9e29424f04341de9ee3f66de526f88,
         type: 3}
       propertyPath: m_Animation
@@ -871,17 +876,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f9087173fb274588a6176d57a14991e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1591171970}
   jungleObstacles:
   - {fileID: 2211401737397221294, guid: c625569a8d2e246d691d8e1bea0585ed, type: 3}
   desertObstacles:
   - {fileID: 5824941379379872798, guid: 21a5c5c11a4a74c3a9b251139f2298c3, type: 3}
-  startDelay: 2
-  spawnInterval: 2
-  minSpawnInterval: 1
-  intervalDecreaseRate: 0.1
-  zoneSwitchInterval: 30
-  zoneSwitchTimer: 0
+  laneXPositions:
+  - -2.6
+  - 0
+  - 2.6
+  obstaclesAhead: 4
+  obstacleSpawnInterval: 13
+  obstacleSpawnAheadDistance: 102
+  switchZoneTime: 30
 --- !u!4 &1591171970 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8d9e29424f04341de9ee3f66de526f88,

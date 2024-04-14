@@ -1,96 +1,84 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance; // Singleton instance
+    public GameObject[] jungleObstacles;
+    public GameObject[] desertObstacles;
 
-    public Transform player; // Reference to the player object
-    public GameObject[] jungleObstacles; // Array of jungle obstacles prefabs
-    public GameObject[] desertObstacles; // Array of desert obstacles prefabs
-    public float startDelay = 2f; // Delay before starting to spawn obstacles
-    public float spawnInterval = 3f; // Initial interval between obstacle spawns
-    public float minSpawnInterval = 1f; // Minimum interval between obstacle spawns
-    public float intervalDecreaseRate = 0.1f; // Rate at which spawn interval decreases
-    public float zoneSwitchInterval = 30f; // Interval to switch between zones (in seconds)
-    public float zoneSwitchTimer = 0f; // Timer for zone switching
+    public float[] laneXPositions = { -2.6f, 0f, 2.6f }; // X positions of the lanes
 
-    private List<GameObject> activeObstacles = new List<GameObject>(); // List to keep track of active obstacles
-    private Vector3[] spawnPoints = new Vector3[] { new Vector3(-2.6f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(2.6f, 0f, 0f) }; // Spawn points for obstacles
-    private bool isJungleZone = true; // Flag to indicate if the jungle zone is active
-    private float obstacleSpawnZ = 0f; // Z position to spawn the next obstacle
+    public int obstaclesAhead = 4; // Number of obstacles to spawn ahead of the player
+    public float obstacleSpawnInterval = 10f; // Interval between each obstacle spawn
+    public float obstacleSpawnAheadDistance = 50f; // Distance ahead of the player to spawn obstacles (increased for further distance)
+    public float switchZoneTime = 30f; // Time to switch between zones
 
-    void Awake()
-    {
-        if (instance == null)
-            instance = this;
-        else if (instance != this)
-            Destroy(gameObject);
-    }
+    private bool isJungle = true; // Initially, the game starts in the jungle
+    private Transform playerTransform;
+    private List<GameObject> activeObstacles = new List<GameObject>();
+    private float nextObstacleSpawnZ;
+    private int lastLaneIndex = -1; // Index of the last used lane
+    private float switchZoneTimer = 0f;
 
     void Start()
     {
-        StartCoroutine(SpawnObstacles());
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        nextObstacleSpawnZ = playerTransform.position.z + obstacleSpawnAheadDistance;
     }
 
     void Update()
     {
-        // Update zone switching timer
-        zoneSwitchTimer += Time.deltaTime;
-        if (zoneSwitchTimer >= zoneSwitchInterval)
+        if (playerTransform.position.z + obstacleSpawnAheadDistance >= nextObstacleSpawnZ)
+        {
+            for (int i = 0; i < obstaclesAhead; i++)
+            {
+                SpawnObstacle();
+                nextObstacleSpawnZ += obstacleSpawnInterval;
+            }
+        }
+
+        switchZoneTimer += Time.deltaTime;
+        if (switchZoneTimer >= switchZoneTime)
         {
             SwitchZone();
-            zoneSwitchTimer = 0f;
+            switchZoneTimer = 0f;
         }
-
-        // Decrease spawn interval over time
-        spawnInterval = Mathf.Max(minSpawnInterval, spawnInterval - intervalDecreaseRate * Time.deltaTime);
     }
 
-    IEnumerator SpawnObstacles()
+    void SpawnObstacle()
     {
-        yield return new WaitForSeconds(startDelay);
+        GameObject obstacleToSpawn;
+        float spawnX;
+        int laneIndex;
 
-        while (true)
+        // Choose a lane different from the last used lane
+        do
         {
-            // Choose a random spawn point
-            Vector3 spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+            laneIndex = Random.Range(0, laneXPositions.Length);
+        } while (laneIndex == lastLaneIndex);
 
-            // Choose a random obstacle from the current zone
-            GameObject obstaclePrefab = GetRandomObstacle();
+        lastLaneIndex = laneIndex; // Update the last used lane
 
-            // Spawn the obstacle
-            Vector3 spawnPosition = new Vector3(spawnPoint.x, spawnPoint.y, obstacleSpawnZ);
-            GameObject obstacle = Instantiate(obstaclePrefab, spawnPosition, Quaternion.identity);
-            activeObstacles.Add(obstacle);
+        spawnX = laneXPositions[laneIndex];
 
-            // Update obstacle spawn position
-            obstacleSpawnZ += spawnInterval;
-
-            yield return null;
+        if (isJungle)
+        {
+            obstacleToSpawn = jungleObstacles[Random.Range(0, jungleObstacles.Length)];
         }
-    }
-
-    GameObject GetRandomObstacle()
-    {
-        // Check which zone is active and return a random obstacle from that zone
-        if (isJungleZone)
-            return jungleObstacles[Random.Range(0, jungleObstacles.Length)];
         else
-            return desertObstacles[Random.Range(0, desertObstacles.Length)];
+        {
+            obstacleToSpawn = desertObstacles[Random.Range(0, desertObstacles.Length)];
+        }
+
+        Vector3 spawnPosition = new Vector3(spawnX, 0f, nextObstacleSpawnZ);
+        GameObject newObstacle = Instantiate(obstacleToSpawn, spawnPosition, Quaternion.identity);
+        activeObstacles.Add(newObstacle);
     }
 
     void SwitchZone()
     {
-        // Toggle between jungle and desert zones
-        isJungleZone = !isJungleZone;
-    }
-
-    public void RemoveObstacle(GameObject obstacle)
-    {
-        // Remove obstacle from active obstacles list
-        activeObstacles.Remove(obstacle);
-        Destroy(obstacle);
+        isJungle = !isJungle;
+        Debug.Log("Switched zone to " + (isJungle ? "Jungle" : "Desert"));
     }
 }
