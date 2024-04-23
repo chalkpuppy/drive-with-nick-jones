@@ -10560,7 +10560,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -10836,7 +10836,7 @@ MonoBehaviour:
   - {fileID: 1270705180262620983, guid: e19d9c1d4819c475a97ce883685dba0f, type: 3}
   jungleParticleObject: {fileID: 130216460}
   desertParticleObject: {fileID: 521475201}
-  jungleColor: {r: 0, g: 1, b: 0, a: 1}
+  jungleColor: {r: 0.17475832, g: 0.7735849, b: 0, a: 1}
   desertColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   laneXPositions:
   - -2.6
