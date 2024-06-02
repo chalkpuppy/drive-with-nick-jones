@@ -4,7 +4,16 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/TryAgainScene.unity
+    guid: a3f7864cc8557433394d43527ea48f24
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: c8731f09fc23e4f7585eb5a5387b49c8
+  - enabled: 1
+    path: Assets/Scenes/CollectedScene.unity
+    guid: b80e409fdd8d249f0823a3d6bdc2b0bd
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 3e168099b1c7948d0a8c2ac6221044ad,
       type: 2}

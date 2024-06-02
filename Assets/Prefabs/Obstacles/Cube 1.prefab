@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4419303182679631808}
   - component: {fileID: 1112231255880707164}
   - component: {fileID: 3112124746405015350}
+  - component: {fileID: 3153099915368371124}
   m_Layer: 0
   m_Name: Cube 1
   m_TagString: Obstacle
@@ -108,6 +109,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.6594925, y: 1.540293, z: 3.4887292}
   m_Center: {x: 0.016127443, y: 0.4695053, z: -0.0054741474}
+--- !u!54 &3153099915368371124
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462296949709800682}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2500783759178526802
 GameObject:
   m_ObjectHideFlags: 0

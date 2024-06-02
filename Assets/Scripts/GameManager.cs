@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject planePrefab;
+    public float planeSpawnInterval = 1f;
+    public float planeSpawnTimer = 0f;
+    public float planeSpawnZPosition = 0f;
+
+    public GameObject[] lettersFolder;
+
     public GameObject[] jungleObstacles;
     public GameObject[] desertObstacles;
 
@@ -30,6 +37,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        InvokeRepeating("SpawnPlane", 0f, planeSpawnInterval);
+
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         nextSpawnZ = playerTransform.position.z + spawnAheadDistance;
 
@@ -37,17 +46,29 @@ public class GameManager : MonoBehaviour
         SetParticleColors();
 
         // Set initial fog color
-        RenderSettings.fogColor = isJungle ? jungleColor : desertColor;
+        //RenderSettings.fogColor = isJungle ? jungleColor : desertColor;
+    }
+
+    private void FixedUpdate()
+    {
+        planeSpawnTimer += Time.deltaTime;
+        if (planeSpawnTimer >= spawnInterval)
+        {
+            SpawnPlane();
+            planeSpawnTimer = 0f;
+        }
     }
 
     void Update()
     {
-        // Spawn obstacles
+
+
         if (playerTransform.position.z + spawnAheadDistance >= nextSpawnZ)
         {
             for (int i = 0; i < obstaclesAhead; i++)
             {
                 SpawnObstacle();
+                SpawnLetter(); // Call the method to spawn letters
                 nextSpawnZ += spawnInterval;
             }
         }
@@ -58,6 +79,16 @@ public class GameManager : MonoBehaviour
             SwitchZone();
             switchZoneTimer = 0f;
         }
+
+
+    }
+
+    private void SpawnPlane()
+    {
+        GameObject newPlane = Instantiate(planePrefab, new Vector3(0f, 0f, planeSpawnZPosition), Quaternion.identity);
+
+
+        planeSpawnZPosition += 10f; // Increment x position for next spawn
     }
 
     void SpawnObstacle()
@@ -90,13 +121,28 @@ public class GameManager : MonoBehaviour
         activeObstacles.Add(newObstacle);
     }
 
+    void SpawnLetter()
+    {
+        // Choose a lane randomly
+        int laneIndex = Random.Range(0, laneXPositions.Length);
+        float spawnX = laneXPositions[laneIndex];
+
+        // Choose a random letter prefab from the folder
+        GameObject letterToSpawn = lettersFolder[Random.Range(0, lettersFolder.Length)];
+
+        Vector3 spawnPosition = new Vector3(spawnX, 0f, nextSpawnZ);
+        // Set the desired rotation
+        Quaternion spawnRotation = Quaternion.Euler(90f, 180f, 0f);
+        GameObject newLetter = Instantiate(letterToSpawn, spawnPosition, spawnRotation);
+    }
+
     void SwitchZone()
     {
         isJungle = !isJungle;
         Debug.Log("Switched zone to " + (isJungle ? "Jungle" : "Desert"));
 
         // Start the fog color transition coroutine
-        StartCoroutine(ChangeFogColor(RenderSettings.fogColor, isJungle ? jungleColor : desertColor, fogTransitionTime));
+        //StartCoroutine(ChangeFogColor(RenderSettings.fogColor, isJungle ? jungleColor : desertColor, fogTransitionTime));
 
         // Change particle colors after a delay
         Invoke("SetParticleColors", fogTransitionTime);

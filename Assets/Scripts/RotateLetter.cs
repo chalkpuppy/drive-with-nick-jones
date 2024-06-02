@@ -10,4 +10,12 @@ public class RotateLetter : MonoBehaviour
         // Rotate the object around the y-axis continuously
         transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Obstacle"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }
