@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,19 +21,44 @@ public class PlayerController : MonoBehaviour
     // Target lane index
     private int currentLaneIndex = 1; // Start in the middle lane
 
+    // Hearts related variables
+    public GameObject[] hearts;
+    private int heartsRemaining;
+
+    // Reference to the pop-up GameObject
+    [SerializeField] private GameObject gameOverPopup;
+
+    // Flag to check if the game is over
+    private bool isGameOver = false;
+
     private void Start()
     {
         // Get the Animator component
         animator = GetComponent<Animator>();
+
+        // Initialize hearts
+        heartsRemaining = hearts.Length;
+
+        // Ensure the game over pop-up is disabled at start
+        if (gameOverPopup != null)
+        {
+            gameOverPopup.SetActive(false);
+        }
     }
 
     private void Update()
     {
+        if (isGameOver)
+            return;
+
         // Move forward
         transform.Translate(0, 0, forwardSpeed * Time.deltaTime);
 
         // Detect swipe gestures
         DetectSwipe();
+
+        // Detect keyboard input
+        DetectKeyboardInput();
 
         // Move towards target lane position
         Vector3 targetPosition = new Vector3(lanePositionsX[currentLaneIndex], transform.position.y, transform.position.z);
@@ -69,13 +95,11 @@ public class PlayerController : MonoBehaviour
 
             if (swipeDirection == Vector3.right)
             {
-                animator.SetTrigger("turnRight");
-                currentLaneIndex = Mathf.Clamp(currentLaneIndex + 1, 0, lanePositionsX.Length - 1);
+                MoveRight();
             }
             else
             {
-                animator.SetTrigger("turnLeft");
-                currentLaneIndex = Mathf.Clamp(currentLaneIndex - 1, 0, lanePositionsX.Length - 1);
+                MoveLeft();
             }
         }
     }
@@ -90,12 +114,81 @@ public class PlayerController : MonoBehaviour
         return Mathf.Abs(fingerDownPosition.x - fingerUpPosition.x) > minDistanceForSwipe;
     }
 
+    private void DetectKeyboardInput()
+    {
+        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+        {
+            MoveRight();
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+        {
+            MoveLeft();
+        }
+    }
+
+    private void MoveRight()
+    {
+        animator.SetTrigger("turnRight");
+        currentLaneIndex = Mathf.Clamp(currentLaneIndex + 1, 0, lanePositionsX.Length - 1);
+    }
+
+    private void MoveLeft()
+    {
+        animator.SetTrigger("turnLeft");
+        currentLaneIndex = Mathf.Clamp(currentLaneIndex - 1, 0, lanePositionsX.Length - 1);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Obstacle"))
         {
             // Play the "Break" animation
             animator.SetTrigger("break");
+            LoseHeart();
         }
+    }
+
+    public void LoseHeart()
+    {
+        if (heartsRemaining > 0)
+        {
+            heartsRemaining--;
+            Destroy(hearts[heartsRemaining]);
+        }
+
+        if (heartsRemaining == 0)
+        {
+            GameOver();
+        }
+    }
+
+    private void GameOver()
+    {
+        isGameOver = true;
+
+        // Enable the game over pop-up
+        if (gameOverPopup != null)
+        {
+            gameOverPopup.SetActive(true);
+        }
+
+        // Stop all movement
+        forwardSpeed = 0;
+        moveSpeed = 0;
+
+        // Optionally, disable player input handling
+        this.enabled = false;
+    }
+
+    public void StopGame()
+    {
+        isGameOver = true;
+
+        // Stop all movement
+        forwardSpeed = 0;
+        moveSpeed = 0;
+
+        // Optionally, disable player input handling
+        this.enabled = false;
     }
 }

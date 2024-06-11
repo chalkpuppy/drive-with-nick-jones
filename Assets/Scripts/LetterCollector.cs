@@ -1,46 +1,119 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System.Collections.Generic;
+using TMPro;
 
 public class LetterCollector : MonoBehaviour
 {
-    // The string containing the word to be collected
-    public string wordToCollect = "London";
+    public Color collectedColor = Color.green;
+    private GameManager gameManager;
+    private List<string> lettersToCollect;
+    [SerializeField] private GameObject particleEffectPrefab;
+    private PlayerController playerController;
+    [SerializeField] private GameObject winPopup;
 
-    // List to keep track of collected letters
-    private List<char> lettersToCollect;
+    // Reference to the parent object containing UI letters
+    [SerializeField] private GameObject lettersParent;
 
-    void Start()
+    private void Start()
     {
-        // Split the wordToCollect string into individual letters
-        lettersToCollect = new List<char>(wordToCollect.ToLower());
+        gameManager = FindObjectOfType<GameManager>();
+        if (gameManager != null)
+        {
+            lettersToCollect = new List<string>(gameManager.lettersToCollect);
+        }
+        else
+        {
+            Debug.LogError("GameManager not found!");
+        }
+
+        playerController = FindObjectOfType<PlayerController>();
+        if (playerController == null)
+        {
+            Debug.LogError("PlayerController not found!");
+        }
+
+        if (winPopup != null)
+        {
+            winPopup.SetActive(false);
+        }
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        // Check if the collided object has the "Letter" tag
         if (other.CompareTag("Letter"))
         {
-            // Check if the collided object's name is a letter to collect
-            char collidedLetter = char.ToLower(other.gameObject.name[0]);
-            if (lettersToCollect.Contains(collidedLetter))
-            {
-                // Mark the letter as collected
-                lettersToCollect.Remove(collidedLetter);
+            string letterName = other.gameObject.name.ToLower();
+            string letter = letterName[0].ToString();
 
-                // Check if all letters are collected
+            Debug.Log($"Collected letter: {letter}");
+            Debug.Log($"Current letters to collect: {string.Join(", ", lettersToCollect)}");
+
+            if (particleEffectPrefab != null)
+            {
+                Instantiate(particleEffectPrefab, other.transform.position, Quaternion.identity);
+            }
+
+            if (lettersToCollect.Contains(letter))
+            {
+                lettersToCollect.Remove(letter);
+
+                UpdateUI(letter); // Update UI for collected letter
+
+                Debug.Log($"Letter {letter} found and removed. Remaining letters: {string.Join(", ", lettersToCollect)}");
+
                 if (lettersToCollect.Count == 0)
                 {
-                    // Load the "AllCollected" scene
-                    SceneManager.LoadScene("AllCollected");
+                    WinGame();
                 }
             }
             else
             {
-                SceneManager.LoadScene("TryAgainScene");
+                Debug.Log($"Letter {letter} not found in the list. Losing a heart.");
+                playerController.LoseHeart();
+            }
+
+            Destroy(other.gameObject);
+        }
+    }
+
+    private void WinGame()
+    {
+        playerController.StopGame();
+
+        if (winPopup != null)
+        {
+            winPopup.SetActive(true);
+        }
+    }
+
+    private void UpdateUI(string letter)
+    {
+        // Convert the collected letter to uppercase
+        string upperCaseLetter = letter.ToUpper();
+
+        // Find the UI letter corresponding to the collected letter
+        Transform uiLetter = lettersParent.transform.Find(upperCaseLetter);
+
+        if (uiLetter != null)
+        {
+            // Check if the letter has already been collected
+            if (!uiLetter.gameObject.name.EndsWith("Collected"))
+            {
+                // Change the name of the UI letter to indicate it's collected
+                uiLetter.gameObject.name += "Collected";
+
+                // Change the color of the text letter to green
+                TextMeshProUGUI letterText = uiLetter.GetComponent<TextMeshProUGUI>();
+                if (letterText != null)
+                {
+                    letterText.color = collectedColor;
+                }
             }
         }
-        
-
+        else
+        {
+            Debug.LogWarning($"UI Letter for '{upperCaseLetter}' not found.");
+        }
     }
 }

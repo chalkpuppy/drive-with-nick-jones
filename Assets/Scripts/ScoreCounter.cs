@@ -42,16 +42,4 @@ public class StoreCounter : MonoBehaviour
         }
     }
 
-    // Public function to add additional score
-    public void AddAdditionalScore()
-    {
-        additionalScore += 20;
-        score += additionalScore;
-        scoreText.text = score.ToString();
-
-        // Enable additional score UI text for 2 seconds
-        isAdditionalScoreActive = true;
-        additionalScoreText.text = "+20";
-        additionalScoreText.gameObject.SetActive(true);
-    }
 }

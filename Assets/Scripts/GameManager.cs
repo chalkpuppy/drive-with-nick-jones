@@ -1,9 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public string cityToCollect;
+    public List<string> lettersToCollect;
+
+    public GameObject letterPrefab; // Prefab for the letter UI element
+    public TextMeshProUGUI aboveText; // Text element above the city name letters
+    public GameObject lettersParent; // Parent GameObject to hold the letters
+    public float letterSpacing = 2f; // Spacing between letters
+    public float verticalOffset = 2f; // Vertical offset from the above text
+
+
     public GameObject planePrefab;
     public float planeSpawnInterval = 1f;
     public float planeSpawnTimer = 0f;
@@ -35,18 +47,66 @@ public class GameManager : MonoBehaviour
     private int lastLaneIndex = -1; // Index of the last used lane
     private float switchZoneTimer = 0f;
 
+    private void Awake()
+    {
+        InitializeLettersToCollect();
+        GenerateCityName(cityToCollect);
+    }
+
     void Start()
     {
+        
         InvokeRepeating("SpawnPlane", 0f, planeSpawnInterval);
 
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         nextSpawnZ = playerTransform.position.z + spawnAheadDistance;
 
         // Set initial particle colors
-        SetParticleColors();
+        //SetParticleColors();
 
         // Set initial fog color
         //RenderSettings.fogColor = isJungle ? jungleColor : desertColor;
+    }
+
+    public void GenerateCityName(string cityName)
+    {
+        ClearCityName(); // Clear existing letters if any
+
+        // Calculate starting position for the first letter
+        float startX = -(cityName.Length - 1) * letterSpacing / 2;
+
+        // Get the position to spawn the letters
+        Vector3 spawnPosition = aboveText.rectTransform.position - new Vector3(0f, aboveText.rectTransform.sizeDelta.y / 2 + verticalOffset, 0f);
+
+        // Position the letters horizontally centered with the specified spacing
+        for (int i = 0; i < cityName.Length; i++)
+        {
+            char letter = cityName[i];
+            Vector3 position = spawnPosition + new Vector3(startX + i * letterSpacing, 0f, 0f); // Calculate position based on startX and letterSpacing
+            GameObject newLetter = Instantiate(letterPrefab, position, Quaternion.identity, lettersParent.transform); // Instantiate letter prefab as a child of the parent GameObject
+            newLetter.name = letter.ToString().ToUpper(); // Name the GameObject with the letter name
+            newLetter.GetComponent<TextMeshProUGUI>().text = letter.ToString().ToUpper(); // Set text of the UI element to the letter
+        }
+    }
+
+
+
+    public void ClearCityName()
+    {
+        // Destroy all existing letters in the UI
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    private void InitializeLettersToCollect()
+    {
+        lettersToCollect = new List<string>();
+        foreach (char letter in cityToCollect.ToLower())
+        {
+            lettersToCollect.Add(letter.ToString());
+        }
     }
 
     private void FixedUpdate()
