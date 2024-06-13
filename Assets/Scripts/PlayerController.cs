@@ -3,71 +3,65 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    // Swipe detection variables
+    public GameObject particles;
     private Vector2 fingerDownPosition;
     private Vector2 fingerUpPosition;
     [SerializeField] private float minDistanceForSwipe = 20f;
+    private float[] lanePositionsX = { -2.6f, 0f, 2.6f };
 
-    // Lane related variables
-    private float[] lanePositionsX = { -2.6f, 0f, 2.6f }; // Lane positions by x-coordinate
-
-    // Animator reference
     private Animator animator;
-
-    // Movement speed
     [SerializeField] private float forwardSpeed = 5f;
     [SerializeField] private float moveSpeed = 5f;
-
-    // Target lane index
-    private int currentLaneIndex = 1; // Start in the middle lane
-
-    // Hearts related variables
+    private int currentLaneIndex = 1;
     public GameObject[] hearts;
     private int heartsRemaining;
-
-    // Reference to the pop-up GameObject
     [SerializeField] private GameObject gameOverPopup;
-
-    // Flag to check if the game is over
     private bool isGameOver = false;
+
+    [SerializeField] private StoreCounter storeCounter; // Reference to StoreCounter
+
+    // Cooldown variables
+    [SerializeField] private float turnCooldownDuration = 0.5f;
+    private float timeSinceLastTurn;
+
+    // Audio variables
+    public AudioSource audioSource;
+    [SerializeField] private AudioClip turnSound;
 
     private void Start()
     {
-        // Get the Animator component
         animator = GetComponent<Animator>();
-
-        // Initialize hearts
         heartsRemaining = hearts.Length;
 
-        // Ensure the game over pop-up is disabled at start
+
         if (gameOverPopup != null)
         {
             gameOverPopup.SetActive(false);
+        }
+
+        if (storeCounter == null)
+        {
+            storeCounter = FindObjectOfType<StoreCounter>(); // Find StoreCounter if not assigned
         }
     }
 
     private void Update()
     {
-        if (isGameOver)
-            return;
+        if (isGameOver) return;
 
-        // Move forward
         transform.Translate(0, 0, forwardSpeed * Time.deltaTime);
-
-        // Detect swipe gestures
         DetectSwipe();
-
-        // Detect keyboard input
         DetectKeyboardInput();
 
-        // Move towards target lane position
         Vector3 targetPosition = new Vector3(lanePositionsX[currentLaneIndex], transform.position.y, transform.position.z);
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+
+        // Update the time since last turn
+        timeSinceLastTurn += Time.deltaTime;
     }
 
     private void DetectSwipe()
     {
-        // Check for swipe input
         if (Input.GetMouseButtonDown(0))
         {
             fingerDownPosition = Input.mousePosition;
@@ -90,7 +84,6 @@ public class PlayerController : MonoBehaviour
     {
         if (SwipeDistanceCheckMet() && IsHorizontalSwipe())
         {
-            // Determine swipe direction
             Vector3 swipeDirection = (fingerDownPosition.x - fingerUpPosition.x > 0) ? Vector3.left : Vector3.right;
 
             if (swipeDirection == Vector3.right)
@@ -116,11 +109,11 @@ public class PlayerController : MonoBehaviour
 
     private void DetectKeyboardInput()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+        if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) && timeSinceLastTurn >= turnCooldownDuration)
         {
             MoveRight();
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+        else if ((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) && timeSinceLastTurn >= turnCooldownDuration)
         {
             MoveLeft();
         }
@@ -128,21 +121,42 @@ public class PlayerController : MonoBehaviour
 
     private void MoveRight()
     {
-        animator.SetTrigger("turnRight");
-        currentLaneIndex = Mathf.Clamp(currentLaneIndex + 1, 0, lanePositionsX.Length - 1);
+        if (timeSinceLastTurn >= turnCooldownDuration && currentLaneIndex < lanePositionsX.Length - 1)
+        {
+            animator.SetTrigger("turnRight");
+            currentLaneIndex++;
+            timeSinceLastTurn = 0f; // Reset cooldown timer
+
+            // Play turn sound
+            PlayTurnSound();
+        }
     }
 
     private void MoveLeft()
     {
-        animator.SetTrigger("turnLeft");
-        currentLaneIndex = Mathf.Clamp(currentLaneIndex - 1, 0, lanePositionsX.Length - 1);
+        if (timeSinceLastTurn >= turnCooldownDuration && currentLaneIndex > 0)
+        {
+            animator.SetTrigger("turnLeft");
+            currentLaneIndex--;
+            timeSinceLastTurn = 0f; // Reset cooldown timer
+
+            // Play turn sound
+            PlayTurnSound();
+        }
+    }
+
+    private void PlayTurnSound()
+    {
+        if (audioSource != null && turnSound != null)
+        {
+            audioSource.PlayOneShot(turnSound);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Obstacle"))
         {
-            // Play the "Break" animation
             animator.SetTrigger("break");
             LoseHeart();
         }
@@ -165,30 +179,26 @@ public class PlayerController : MonoBehaviour
     private void GameOver()
     {
         isGameOver = true;
+        particles.SetActive(false);
 
-        // Enable the game over pop-up
         if (gameOverPopup != null)
         {
             gameOverPopup.SetActive(true);
         }
 
-        // Stop all movement
         forwardSpeed = 0;
         moveSpeed = 0;
-
-        // Optionally, disable player input handling
         this.enabled = false;
+
+        storeCounter.StopGame(); // Stop score counting
     }
 
     public void StopGame()
     {
         isGameOver = true;
-
-        // Stop all movement
         forwardSpeed = 0;
         moveSpeed = 0;
-
-        // Optionally, disable player input handling
         this.enabled = false;
+        storeCounter.StopGame(); // Stop score counting
     }
 }

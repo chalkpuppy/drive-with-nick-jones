@@ -5,6 +5,10 @@ using TMPro;
 
 public class LetterCollector : MonoBehaviour
 {
+    public AudioSource audioSource;
+    [SerializeField] private AudioClip crashSound;
+    [SerializeField] private AudioClip collectSound;
+
     public Color collectedColor = Color.green;
     private GameManager gameManager;
     private List<string> lettersToCollect;
@@ -12,8 +16,8 @@ public class LetterCollector : MonoBehaviour
     private PlayerController playerController;
     [SerializeField] private GameObject winPopup;
 
-    // Reference to the parent object containing UI letters
     [SerializeField] private GameObject lettersParent;
+    [SerializeField] private StoreCounter storeCounter; // Reference to StoreCounter
 
     private void Start()
     {
@@ -37,12 +41,18 @@ public class LetterCollector : MonoBehaviour
         {
             winPopup.SetActive(false);
         }
+
+        if (storeCounter == null)
+        {
+            storeCounter = FindObjectOfType<StoreCounter>(); // Find StoreCounter if not assigned
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Letter"))
         {
+            audioSource.PlayOneShot(collectSound);
             string letterName = other.gameObject.name.ToLower();
             string letter = letterName[0].ToString();
 
@@ -75,11 +85,21 @@ public class LetterCollector : MonoBehaviour
 
             Destroy(other.gameObject);
         }
+        else if (other.CompareTag("Obstacle"))
+        {
+            audioSource.PlayOneShot(crashSound);
+            playerController.LoseHeart();
+            playerController.LoseHeart();
+            playerController.LoseHeart();
+            Destroy(this);
+        }
+
     }
 
     private void WinGame()
     {
         playerController.StopGame();
+        storeCounter.StopGame(); // Stop score counting
 
         if (winPopup != null)
         {
@@ -89,21 +109,14 @@ public class LetterCollector : MonoBehaviour
 
     private void UpdateUI(string letter)
     {
-        // Convert the collected letter to uppercase
         string upperCaseLetter = letter.ToUpper();
-
-        // Find the UI letter corresponding to the collected letter
         Transform uiLetter = lettersParent.transform.Find(upperCaseLetter);
 
         if (uiLetter != null)
         {
-            // Check if the letter has already been collected
             if (!uiLetter.gameObject.name.EndsWith("Collected"))
             {
-                // Change the name of the UI letter to indicate it's collected
                 uiLetter.gameObject.name += "Collected";
-
-                // Change the color of the text letter to green
                 TextMeshProUGUI letterText = uiLetter.GetComponent<TextMeshProUGUI>();
                 if (letterText != null)
                 {

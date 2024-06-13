@@ -11,4 +11,8 @@ public class ChangeScene : MonoBehaviour
     {
         SceneManager.LoadScene(scene);
     }
+    public void LoadSameScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }

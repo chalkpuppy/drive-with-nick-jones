@@ -6,14 +6,26 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TryAgainScene.unity
-    guid: a3f7864cc8557433394d43527ea48f24
+    path: Assets/Scenes/MenuScene.unity
+    guid: b6d3872a2723442b9b106152f96c8d51
   - enabled: 1
-    path: Assets/Scenes/MainScene.unity
-    guid: c8731f09fc23e4f7585eb5a5387b49c8
+    path: Assets/Scenes/HowToPlay.unity
+    guid: ed506d9dde97c4df484292e8c09180f5
   - enabled: 1
-    path: Assets/Scenes/CollectedScene.unity
-    guid: b80e409fdd8d249f0823a3d6bdc2b0bd
+    path: Assets/Scenes/Stockholm.unity
+    guid: 60a64a30412724bdf9fc6836496e1fff
+  - enabled: 1
+    path: Assets/Scenes/Berlin.unity
+    guid: 1fb8f6b01d67e47228faafab3070f2d7
+  - enabled: 1
+    path: Assets/Scenes/Kyiv.unity
+    guid: b1be1d38dda854b9b913ca72d73678e8
+  - enabled: 1
+    path: Assets/Scenes/London.unity
+    guid: ede6771233d35494b99a194262ff5f6a
+  - enabled: 1
+    path: Assets/Scenes/Paris.unity
+    guid: e878978dfb027417584ae9d24be6784f
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 3e168099b1c7948d0a8c2ac6221044ad,
       type: 2}

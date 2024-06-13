@@ -91,7 +91,7 @@ PrefabInstance:
     - target: {fileID: -3272106112100924687, guid: 8ae600f7542d748739341f6bef12354d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.85
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: -2571118854743697038, guid: 8ae600f7542d748739341f6bef12354d,
         type: 3}
@@ -131,10 +131,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1325511382126788887}
-    - targetCorrespondingSourceObject: {fileID: -8391222552659086748, guid: 8ae600f7542d748739341f6bef12354d,
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8ae600f7542d748739341f6bef12354d,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3531138685622663207}
+      addedObject: {fileID: 8705674150643260641}
     - targetCorrespondingSourceObject: {fileID: -516098083770646512, guid: 8ae600f7542d748739341f6bef12354d,
         type: 3}
       insertIndex: -1
@@ -205,19 +205,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &6149901340987880604 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: 8ae600f7542d748739341f6bef12354d,
-    type: 3}
-  m_PrefabInstance: {fileID: 6833285699320792824}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &3531138685622663207
-MeshCollider:
+--- !u!65 &8705674150643260641
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6149901340987880604}
+  m_GameObject: {fileID: 5914876618648124329}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -229,10 +223,9 @@ MeshCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5495902117074765545, guid: 8ae600f7542d748739341f6bef12354d, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 5.2, y: 3.2485654, z: 1}
+  m_Center: {x: 0, y: 2.2035704, z: 0}
 --- !u!1 &7363090464682476442 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5117700066308340382, guid: 8ae600f7542d748739341f6bef12354d,
